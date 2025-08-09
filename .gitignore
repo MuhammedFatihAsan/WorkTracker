@@ -1,25 +1,36 @@
-# Python cache
+# Python cache dosyaları
 __pycache__/
 *.pyc
 *.pyo
+# Python kodunun derleme sırasında oluşturduğu geçici dosyalar.
 
-# Virtual environments
+# Sanal ortam klasörleri
 .venv/
 venv/
+# Local geliştirme sırasında oluşturulan sanal ortamlar.
+# Docker ile genelde kullanılmaz, ama local testlerde olabilir.
 
-# macOS
+# macOS sistem dosyası
 .DS_Store
+# Finder’ın oluşturduğu, içeriği olmayan sistem dosyaları.
 
-# IDE
+# IDE ayar klasörleri
 .vscode/
 .idea/
+# VSCode ve PyCharm gibi editörlerin proje ayarları.
 
-# Environment files
+# Ortam değişkenleri dosyaları
 .env
 !.env.example
+# .env dosyası API anahtarları, veritabanı şifreleri gibi gizli bilgileri tutar.
+# Commitlenmez. Örnek olarak .env.example versiyon kontrolünde tutulur.
 
-# Docker
+# Docker override dosyası
 docker-compose.override.yml
+# Docker Compose, varsa bu dosyayı otomatik olarak ana dosyanın üzerine uygular.
+# Genelde kişisel geliştirme ayarları için kullanılır.
+# Projede zorunlu değil, ama commitlenmesini istemiyorsak ignore ederiz.
 
 # Alembic cache
 alembic/__pycache__/
+# Alembic migration klasöründeki Python cache dosyaları.
