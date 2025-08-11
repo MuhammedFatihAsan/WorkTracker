@@ -48,7 +48,7 @@ worktracker/
 
 ### 1️⃣ Depoyu Klonla
 ```bash
-git clone https://github.com/kullaniciadi/worktracker.git
+git clone https://github.com/MuhammedFatihAsan/worktracker.git
 cd worktracker
 ```
 
@@ -84,11 +84,6 @@ uvicorn src.worktracker.main:app --reload
 ```bash
 pytest
 ```
-
----
-
-## 📜 Lisans
-Bu proje opsiyonel olarak **MIT** lisansı ile lisanslanabilir (`LICENSE` dosyasına bakın).
 
 ---
 
