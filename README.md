@@ -247,8 +247,6 @@ curl -X PATCH http://localhost:8000/tasks/1 \
 
 ## 🧪 Test
 
-> (Opsiyonel) Pytest altyapısı için `tests/` altında senaryolar ekleyebilirsiniz.
-
 ```bash
 pytest
 ```
@@ -259,5 +257,3 @@ pytest
 
 Bu proje eğitim amaçlı hazırlanmıştır.
 
-```
-```
