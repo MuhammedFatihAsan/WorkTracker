@@ -1,20 +1,20 @@
-"""template check
+"""template check 2
 
-Revision ID: 49f520e225a3
-Revises: 20407b24166b
-Create Date: 2025-08-12 12:57:56.206286
+Revision ID: 407cf202b5fa
+Revises: cd923842990f
+Create Date: 2025-08-12 13:02:00.213984
 
 """
 from typing import Sequence, Union
 
 from alembic import op
 import sqlalchemy as sa
-import aqlmodel
+import sqlmodel
 
 
 # revision identifiers, used by Alembic.
-revision: str = '49f520e225a3'
-down_revision: Union[str, Sequence[str], None] = '20407b24166b'
+revision: str = '407cf202b5fa'
+down_revision: Union[str, Sequence[str], None] = 'cd923842990f'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
