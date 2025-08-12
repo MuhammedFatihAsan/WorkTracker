@@ -52,6 +52,7 @@ def update_task(task_id: int, data: TaskUpdate, db: Session = Depends(get_db)):
     """
     Task için kısmi güncelleme.
     - Gönderilen alanlara göre title/description/status/assignee_id güncellenir.
+    - TODO / IN_PROGRESS / DONE
     - Yoksa 404.
     """
     task = db.get(Task, task_id)

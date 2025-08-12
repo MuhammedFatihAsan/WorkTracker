@@ -14,5 +14,5 @@ class UserRead(SQLModel):
 
 class UserUpdate(SQLModel):
     # PATCH için her alan opsiyonel (kısmi güncelleme)
-    email: Optional[str] = None
+    email: EmailStr | None = None
     full_name: Optional[str] = None

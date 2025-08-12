@@ -29,7 +29,9 @@ class TaskRead(SQLModel):
     assignee_id: Optional[int] = None
 
 class TaskUpdate(SQLModel):
-    title: Optional[str] = None
-    description: Optional[str] = None
+    # title opsiyonel: gönderilirse biçim doğrulansın
+    title: str | None = Field(default=None, pattern=r"^[A-Za-zÇĞİÖŞÜçğıöşü ]{2,50}$")
+    # opsiyonel; gelirse boş olamaz (strip + min_length=1)
+    description: constr(strip_whitespace=True, min_length=1) | None = None  # type: ignore
     status: Optional[TaskStatus] = None
     assignee_id: Optional[int] = None
