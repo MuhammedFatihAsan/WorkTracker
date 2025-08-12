@@ -4,7 +4,10 @@ from sqlmodel import SQLModel
 from ..models.task import TaskStatus
 
 class TaskCreate(SQLModel):
-    title: str = Field(regex=r"^[A-Za-zÇĞİÖŞÜçğıöşü ]{2,50}$")
+    # title alanı:
+    # - Field(pattern=...): Pydantic v2'de regex yerine pattern kullanılır
+    # - Bu desen: yalnızca Türkçe/İngilizce harf ve boşluk (2–50 karakter)
+    title: str = Field(pattern=r"^[A-Za-zÇĞİÖŞÜçğıöşü ]{2,50}$")
     # description alanı:
     # - constr: string için kısıtlı tip
     # - strip_whitespace=True: başındaki ve sonundaki boşlukları otomatik temizler
