@@ -1,8 +1,9 @@
-from typing import Optional
+from typing import TYPE_CHECKING, Optional
 from enum import Enum
 from sqlmodel import SQLModel, Field, Relationship
 
-from worktracker.models.user import User
+if TYPE_CHECKING:
+    from .user import User  # sadece tip kontrolünde
 
 class TaskStatus(str, Enum):
     TODO = "TODO"

@@ -1,7 +1,8 @@
-from typing import Optional, List
+from typing import TYPE_CHECKING, Optional, List
 from sqlmodel import SQLModel, Field, Relationship
 
-from worktracker.models.task import Task
+if TYPE_CHECKING:
+    from .task import Task  # sadece tip kontrolünde import, runtime'da değil
 
 class User(SQLModel, table=True):
     __tablename__ = "users"
