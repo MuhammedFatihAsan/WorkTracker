@@ -27,3 +27,6 @@ postgres_data/
 # Editors
 .vscode/
 .idea/
+
+# macOS
+.DS_Store
