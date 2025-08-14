@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import Protocol, runtime_checkable, Optional, List
+from backend.src.worktracker.models.task import TaskStatus
 from worktracker.models import User
 from worktracker.models import Task
 
