@@ -57,7 +57,13 @@ class UserService:
             # Genelde UNIQUE ihlali (email). İstersen e.orig.pgcode ile 23505 kontrolü yapabilirsin.
             raise DuplicateEmailError("Email already exists") from e
 
-        # if self.ws: self.ws.publish_user_created(user.id)  # ileride
+        # WS publish (başarılı create sonrası)
+        if self.ws:
+            try:
+                self.ws.publish_user_created(user.id)
+            except Exception:
+                pass
+
         return UserRead.model_validate(user, from_attributes=True)
 
     def get(self, user_id: int) -> UserRead:
@@ -82,5 +88,11 @@ class UserService:
         except IntegrityError as e:
             raise DuplicateEmailError("Email already exists") from e
 
-        # if self.ws: self.ws.publish_user_updated(user.id)     # ileride
+        # WS publish (başarılı update sonrası)
+        if self.ws:
+            try:
+                self.ws.publish_user_updated(user.id)
+            except Exception:
+                pass
+
         return UserRead.model_validate(user, from_attributes=True)

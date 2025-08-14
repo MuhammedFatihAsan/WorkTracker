@@ -12,15 +12,13 @@ class WebSocketHub:
     Basit WS hub:
       - public oda: /ws
       - kullanıcı odası: /ws/users/{user_id}
-    Servis içinden sync olarak çağrılan publish_* metodları,
-    içeride async yayınları güvenli şekilde tetikler (anyio.from_thread.run).
+    Servis içinden sync çağrılan publish_* metodları,
+    içeride async yayınları güvenle tetikler (anyio.from_thread.run).
     """
 
     def __init__(self) -> None:
-        # websocket set'leri
         self._public_clients: Set[WebSocket] = set()
         self._user_rooms: Dict[int, Set[WebSocket]] = {}
-        # eşzamanlı erişim için lock
         self._lock = asyncio.Lock()
 
     # ---------- bağlan/ayrıl ----------
@@ -51,14 +49,16 @@ class WebSocketHub:
     # ---------- publish (sync entry) ----------
 
     def publish_task_created(self, task_id: int, assignee_id: Optional[int]) -> None:
-        """
-        Servis katmanı sync çalışırken güvenle çağrılır.
-        Async yayın _publish_* içinde yapılır.
-        """
         anyio.from_thread.run(self._publish_task_created_async, task_id, assignee_id)
 
     def publish_task_updated(self, task_id: int) -> None:
         anyio.from_thread.run(self._publish_task_updated_async, task_id)
+
+    def publish_user_created(self, user_id: int) -> None:
+        anyio.from_thread.run(self._publish_user_created_async, user_id)
+
+    def publish_user_updated(self, user_id: int) -> None:
+        anyio.from_thread.run(self._publish_user_updated_async, user_id)
 
     # ---------- publish (async core) ----------
 
@@ -77,6 +77,26 @@ class WebSocketHub:
             targets = set(self._public_clients)
         await self._broadcast_json(targets, payload)
 
+    async def _publish_user_created_async(self, user_id: int) -> None:
+        payload = {"type": "user_created", "user_id": user_id}
+        targets: Set[WebSocket] = set()
+        async with self._lock:
+            targets |= self._public_clients
+            room = self._user_rooms.get(user_id)
+            if room:
+                targets |= room
+        await self._broadcast_json(targets, payload)
+
+    async def _publish_user_updated_async(self, user_id: int) -> None:
+        payload = {"type": "user_updated", "user_id": user_id}
+        targets: Set[WebSocket] = set()
+        async with self._lock:
+            targets |= self._public_clients
+            room = self._user_rooms.get(user_id)
+            if room:
+                targets |= room
+        await self._broadcast_json(targets, payload)
+
     # ---------- yardımcı ----------
 
     async def _broadcast_json(self, clients: Set[WebSocket], message: dict) -> None:
@@ -90,22 +110,19 @@ class WebSocketHub:
             async with self._lock:
                 for ws in dead:
                     self._public_clients.discard(ws)
-                # user odalarından da temizle
                 for room in self._user_rooms.values():
                     room.discard(ws)
 
 
 async def hold_connection(ws: WebSocket) -> None:
     """
-    Bağlı websocket'i açık tutmak için basit loop.
-    İstemci bir şey göndermezse bile ping/pong’lar bağlantıyı yaşatır.
+    WS bağlantısını açık tutar. İstemci bir şey göndermezse bile
+    receive bekleyerek bağlantının yaşamını uzatır.
     """
     try:
         while True:
-            # istemciden mesaj bekle (gelen mesajı çöpe atıyoruz)
-            await ws.receive_text()
+            await ws.receive_text()  # gelen mesajı okumak yeterli
     except WebSocketDisconnect:
         pass
     except Exception:
-        # loglamak istersen burada logla
         pass
