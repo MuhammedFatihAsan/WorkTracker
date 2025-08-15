@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 from fastapi import FastAPI
-from .api.routers import users, tasks, ws
+
+from backend.src.worktracker.api.routers import tasks, users, ws
+
 
 #FastAPI uygulamasını başlat
 app = FastAPI(title="WorkTracker")

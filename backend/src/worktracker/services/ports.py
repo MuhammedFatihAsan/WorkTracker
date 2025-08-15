@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 from typing import Protocol, runtime_checkable, List
-from worktracker.schemas.user import UserCreate, UserRead, UserUpdate
-from worktracker.schemas.task import TaskCreate, TaskUpdate, TaskRead
+
+from backend.src.worktracker.schemas.task import TaskCreate, TaskRead, TaskUpdate
+from backend.src.worktracker.schemas.user import UserCreate, UserRead, UserUpdate
+
 
 @runtime_checkable
 class UserServicePort(Protocol):

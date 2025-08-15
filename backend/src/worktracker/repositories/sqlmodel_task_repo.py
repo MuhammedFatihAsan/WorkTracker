@@ -3,9 +3,8 @@ from __future__ import annotations
 from typing import Optional, List
 from sqlmodel import Session, select
 
-from worktracker.models.task import Task, TaskStatus
-from worktracker.repositories.ports import TaskRepositoryPort
-
+from backend.src.worktracker.models.task import Task, TaskStatus
+from backend.src.worktracker.repositories.ports import TaskRepositoryPort
 
 class SQLModelTaskRepository(TaskRepositoryPort):
     """

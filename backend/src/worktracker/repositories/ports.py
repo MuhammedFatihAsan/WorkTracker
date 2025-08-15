@@ -1,9 +1,8 @@
 from __future__ import annotations
-
 from typing import Protocol, runtime_checkable, Optional, List
-from backend.src.worktracker.models.task import TaskStatus
-from worktracker.models import User
-from worktracker.models import Task
+
+from backend.src.worktracker.models.task import Task, TaskStatus
+from backend.src.worktracker.models.user import User
 
 @runtime_checkable
 class UserRepositoryPort(Protocol):

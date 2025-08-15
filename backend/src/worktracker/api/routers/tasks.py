@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Annotated, List
+from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException
 
 from ...schemas.task import TaskCreate, TaskUpdate, TaskRead

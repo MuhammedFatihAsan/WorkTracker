@@ -1,7 +1,8 @@
 from typing import Optional
 from pydantic import Field, constr
 from sqlmodel import SQLModel
-from ..models.task import TaskStatus
+
+from backend.src.worktracker.models.task import TaskStatus
 
 class TaskCreate(SQLModel):
     # title alanı:
