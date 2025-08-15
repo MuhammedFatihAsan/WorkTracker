@@ -3,8 +3,8 @@ from __future__ import annotations
 from typing import Optional, Any, List
 from sqlalchemy.exc import IntegrityError
 
-from backend.src.worktracker.repositories.ports import TaskRepositoryPort, UserRepositoryPort
-from backend.src.worktracker.schemas.task import TaskCreate, TaskRead, TaskUpdate
+from worktracker.repositories.ports import TaskRepositoryPort, UserRepositoryPort
+from worktracker.schemas.task import TaskCreate, TaskRead, TaskUpdate
 
 
 

@@ -3,8 +3,8 @@ from __future__ import annotations
 from typing import Optional
 from sqlmodel import Session
 
-from backend.src.worktracker.models.user import User
-from backend.src.worktracker.repositories.ports import UserRepositoryPort
+from worktracker.models.user import User
+from worktracker.repositories.ports import UserRepositoryPort
 
 class SQLModelUserRepository(UserRepositoryPort):
     """

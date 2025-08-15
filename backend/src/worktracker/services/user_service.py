@@ -3,8 +3,8 @@ from __future__ import annotations
 from typing import Optional, Any
 from sqlalchemy.exc import IntegrityError
 
-from backend.src.worktracker.repositories.ports import UserRepositoryPort
-from backend.src.worktracker.schemas.user import UserCreate, UserRead, UserUpdate
+from worktracker.repositories.ports import UserRepositoryPort
+from worktracker.schemas.user import UserCreate, UserRead, UserUpdate
 
 class NotFoundError(Exception):
     """Kaynak bulunamadığında servis katmanının fırlattığı domain hatası."""
